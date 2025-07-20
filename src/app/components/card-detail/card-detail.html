@@ -97,7 +97,145 @@
           </div>
         </aside>
 
-      </div> <app-scroll class="mt-20"></app-scroll>
+      </div>
+
+    </div> </div> }
+
+@if (showDownloadModal) {
+  <div class="fixed inset-0 bg-black/50 flex justify-center items-center z-50 p-4" (click)="closeModal()">
+    <div class="bg-white rounded-2xl shadow-xl p-8 text-center w-full max-w-md relative" (click)="$event.stopPropagation()">
+
+      <button (click)="closeModal()" class="absolute top-4 right-4 text-gray-400 hover:text-gray-600 transition-colors">
+        <i class="fa-solid fa-xmark text-2xl cursor-pointer"></i>
+      </button>
+
+      <h3 class="text-2xl font-bold mb-2">Download {{ game?.title }}</h3>
+      <p class="text-gray-600 mb-8">Choose your platform to start playing!</p>
+
+      <div class="flex flex-col space-y-4">
+        @if (game?.appStoreUrl) {
+          <a [href]="game?.appStoreUrl" target="_blank" rel="noopener noreferrer"
+             class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center transition-all">
+            <span>Download on the App Store</span>
+          </a>
+        }
+        @if (game?.playStoreUrl) {
+          <a [href]="game?.playStoreUrl" target="_blank" rel="noopener noreferrer"
+             class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center transition-all">
+            <span>Get it on Google Play</span>
+          </a>
+        }
+        @if (game?.steamUrl) {
+          <a [href]="game?.steamUrl" target="_blank" rel="noopener noreferrer"
+             class="bg-gray-800 hover:bg-gray-900 text-white font-semibold py-3 px-6 rounded-lg flex items-center justify-center transition-all">
+            <span>Download on Steam</span>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+}
+
+@if (game) {
+  <div class="bg-gray-100 font-sans">
+    <div class="max-w-7xl mx-auto p-4 lg:p-8">
+
+      <div class="mb-6">
+        <button (click)="goBack()" class="inline-flex items-center text-gray-700 hover:text-gray-900 font-semibold text-sm transition-colors duration-200">
+          <i class="fa-solid fa-arrow-left text-2xl mr-2 hover:cursor-pointer"></i>
+          Back
+        </button>
+      </div>
+
+      <div class="flex flex-col lg:flex-row lg:space-x-8">
+
+        <main class="w-full lg:w-2/3">
+
+          @if (game.screenshot && game.screenshot.length > 0) {
+            <div class="p-6 bg-white rounded-t-xl shadow-md">
+              <h2 class="text-xl font-bold mb-4">Screenshots & Videos</h2>
+              @if (selectedScreenshot) {
+                <div class="mb-4">
+                  <div class="relative w-full overflow-hidden rounded-lg shadow-lg" style="padding-top: 56.25%;">
+                    <img class="absolute top-0 left-0 w-full h-full object-cover" [src]="selectedScreenshot" alt="Selected Screenshot">
+                  </div>
+                </div>
+              }
+              <div class="flex overflow-x-auto space-x-2 pb-2">
+                @for (screenshotUrl of game.screenshot; track screenshotUrl) {
+                  <div class="flex-shrink-0">
+                    <img
+                      class="w-32 h-20 rounded-md object-cover cursor-pointer border-2 transition-transform duration-200 hover:scale-105"
+                      [class.border-blue-500]="screenshotUrl === selectedScreenshot"
+                      [class.border-transparent]="screenshotUrl !== selectedScreenshot"
+                      [src]="screenshotUrl"
+                      alt="Screenshot thumbnail"
+                      (click)="selectedScreenshot = screenshotUrl">
+                  </div>
+                }
+              </div>
+            </div>
+          }
+
+          <div class="bg-white shadow-md overflow-hidden">
+            <div class="p-6">
+              <div class="flex flex-col sm:flex-row sm:justify-between sm:items-center">
+                <div class="flex items-center">
+                  <img class="w-24 aspect-square rounded-lg object-cover flex-shrink-0" [src]="game.logo" alt="{{ game.title }} Logo">
+                  <div class="ml-4">
+                    <h1 class="text-2xl font-bold text-gray-900 mb-2">{{ game.title }}</h1>
+                    <p class="text-base text-gray-600">{{ game.developed }}</p>
+                  </div>
+                </div>
+                <div class="flex-shrink-0 w-full sm:w-auto mt-4 sm:mt-0">
+                  <button (click)="onDownloadClick()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-lg transition duration-300 hover:cursor-pointer">
+                    Download
+                  </button>
+                </div>
+              </div>
+
+              <div class="mt-6 flex flex-wrap gap-2">
+                @for(type of game.type; track type) {
+                  <span class="bg-gray-200 text-gray-800 text-xs font-semibold px-2.5 py-0.5 rounded-full">
+                    {{ type }}
+                  </span>
+                }
+              </div>
+            </div>
+            <div class="p-6 border-t border-gray-200">
+              <h2 class="text-xl font-bold mb-4">Description</h2>
+              <p class="text-gray-700 whitespace-pre-line transition-all duration-300" [class.line-clamp-3]="!isDescriptionExpanded">
+                {{ game.description }}
+              </p>
+              @if (game.description.length > 200) { <button (click)="isDescriptionExpanded = !isDescriptionExpanded" class="text-blue-600 hover:underline mt-2 font-semibold">
+                {{ isDescriptionExpanded ? 'Read Less' : 'Read More' }}
+              </button>
+              }
+            </div>
+          </div>
+        </main>
+
+        <aside class="w-full lg:w-1/3 mt-8 lg:mt-0 hidden lg:block">
+          <div class="bg-white rounded-lg shadow-md p-6">
+            <h2 class="text-xl font-bold mb-4 text-gray-900">Featured Games</h2>
+            <div class="space-y-4">
+              @for (similarGame of topGames; track similarGame.id) {
+                <div class="flex items-center space-x-4">
+                  <img class="w-16 h-16 rounded-lg object-cover" [src]="similarGame.logo" alt="{{ similarGame.title }} logo">
+                  <div class="flex-grow">
+                    <h3 class="font-bold text-gray-900">{{ similarGame.title }}</h3>
+                    <p class="text-sm text-gray-500">{{ similarGame.type.join(', ') }}</p>
+                  </div>
+                  <a [routerLink]="['/game', similarGame.id]" class="flex-shrink-0 bg-gray-200 hover:bg-gray-300 text-gray-800 text-sm font-bold py-2 px-3 rounded-full transition">
+                    View
+                  </a>
+                </div>
+              }
+            </div>
+          </div>
+        </aside>
+
+      </div>
 
     </div> </div> }
 
@@ -136,4 +274,5 @@
   </div>
 }
 <app-scroll class="mt-20"></app-scroll>
+
 
