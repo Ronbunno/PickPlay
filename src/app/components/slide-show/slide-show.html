@@ -1,0 +1,58 @@
+
+@if (games.length > 0) {
+  <div class="flex flex-col lg:flex-row gap-6 lg:gap-8 mx-auto max-w-7xl px-4">
+    <div class="flex-1">
+      <div class="relative h-96 lg:h-[500px]">
+        @for (game of games; track game.id; let i = $index) {
+          <div class="absolute inset-0 transition-opacity duration-700 ease-in-out"
+               [ngClass]="{ 'opacity-100': i === slideIndex, 'opacity-0': i !== slideIndex }">
+
+            <a [routerLink]="['/game', game.id]" class="block w-full h-full">
+              <img [src]="game.screenshot[0]" class="w-full rounded-lg h-full object-cover" [alt]="game.title">
+
+              <div class="absolute bottom-0 w-full p-4 text-left text-white bg-gradient-to-t from-black/70 to-transparent rounded-b-lg">
+                <h3 class="text-xl font-bold">{{ game.title }}</h3>
+                <p class="mt-2 text-sm line-clamp-2">{{ game.description }}</p>
+              </div>
+            </a>
+          </div>
+        }
+      </div>
+      <div class="text-center mt-4">
+        @for (game of games; track game.id; let i = $index) {
+          <span class="h-3 w-3 inline-block rounded-full mx-1 cursor-pointer transition-all duration-300"
+                [ngClass]="{ 'bg-gray-800 scale-110': i === slideIndex, 'bg-gray-400 hover:bg-gray-600': i !== slideIndex }"
+                (click)="currentSlide(i); $event.stopPropagation()">
+          </span>
+        }
+      </div>
+    </div>
+
+    <!-- Featured Games Sidebar -->
+    <aside class="w-full lg:w-80 xl:w-96">
+      <div class="bg-white rounded-lg shadow-lg p-6 h-96 lg:h-[500px] flex flex-col ">
+        <h2 class="text-xl font-bold mb-6 text-gray-900  ">Featured Games</h2>
+        <div class="space-y-4 flex-1 overflow-y-auto scrollbar-hide ">
+          @for (game of games; track game.id; let i = $index) {
+            <div class="flex items-center space-x-4 p-3 rounded-lg transition-all duration-300 cursor-pointer "
+                 [ngClass]="{ 'bg-blue-50 border border-blue-200': i === slideIndex, 'hover:bg-gray-50': i !== slideIndex }"
+                 (click)="currentSlide(i)">
+
+              <img class="w-16 h-16 rounded-lg object-cover flex-shrink-0 shadow-md"
+                   [src]="game.logo || game.screenshot[0]"
+                   [alt]="game.title + ' logo'">
+
+              <div class="flex-grow min-w-0">
+                <h3 class="font-bold text-gray-900 truncate">{{ game.title }}</h3>
+                <p class="text-sm text-gray-500 line-clamp-2 mt-1">{{ game.description }}</p>
+                @if (game.type && game.type.length > 0) {
+                  <p class="text-xs text-gray-400 mt-1">{{ game.type.join(', ') }}</p>
+                }
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </aside>
+  </div>
+}

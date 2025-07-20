@@ -1,0 +1,20 @@
+@if (threeCards.length > 0) {
+  <div class="p-4">
+    <div class="max-w-6xl mx-auto">
+      <div class="flex overflow-x-auto pb-4 space-x-4 md:overflow-x-visible md:grid md:grid-cols-3 md:gap-6 md:space-x-0">
+        @for (card of threeCards; track card.id) {
+          <a
+            [routerLink]="['/game', card.id]"
+            class="flex-shrink-0 w-80 bg-white rounded-lg shadow-md overflow-hidden md:w-auto block transform transition duration-300 hover:scale-105 hover:shadow-lg"
+          >
+            <img [src]="card.screenshot[0]" [alt]="card.title">
+            <div class="p-4">
+              <h3 class="text-xl font-semibold mb-2">{{ card.title }}</h3>
+              <p class="text-gray-600 line-clamp-2">{{ card.description }}</p>
+            </div>
+          </a>
+        }
+      </div>
+    </div>
+  </div>
+}

@@ -1,0 +1,81 @@
+<header class="fixed w-full top-0 z-50" [ngClass]="uiClasses.nav">
+  <nav class="container mx-auto flex items-center justify-between px-6 py-4">
+    <a routerLink="/" class="text-3xl font-bold text-white hover:scale-105 transition-all duration-300 ease-out">
+      Pick<span class="text-indigo-600 transform-gpu transition-all duration-500 hover:rotate-6" [ngClass]="uiClasses.logo">Play</span>
+    </a>
+    <div class="hidden md:flex items-center justify-between flex-1 ml-16">
+      <div class="flex items-center space-x-8 flex-1 justify-center">
+        <a routerLink="/"
+           class="text-gray-300 hover:text-indigo-400 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-0.5"
+           routerLinkActive="text-indigo-600 font-semibold border-b-2 border-indigo-500"
+           [routerLinkActiveOptions]="{exact: true}">
+          Home
+        </a>
+        <a routerLink="/about"
+           class="text-gray-300 hover:text-indigo-400 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-0.5"
+           routerLinkActive="text-indigo-600 font-semibold border-b-2 border-indigo-500">
+          About
+        </a>
+        <a routerLink="/contact"
+           class="text-gray-300 hover:text-indigo-400 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-0.5"
+           routerLinkActive="text-indigo-600 font-semibold border-b-2 border-indigo-500">
+          Contact
+        </a>
+        <a routerLink="/faq"
+           class="text-gray-300 hover:text-indigo-400 transition-all duration-300 ease-out hover:scale-110 hover:-translate-y-0.5"
+           routerLinkActive="text-indigo-600 font-semibold border-b-2 border-indigo-500">
+          FAQ
+        </a>
+      </div>
+      <button routerLink="/coming" class="px-4 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-all duration-300 ease-out flex-shrink-0 hover:scale-105 hover:shadow-lg hover:shadow-indigo-500/25 transform">
+        Download
+      </button>
+
+    </div>
+    <div class="md:hidden">
+      <div class="relative z-50 inline-block cursor-pointer group hover:scale-110 transition-transform duration-300" (click)="toggleMenu()">
+        <div class="h-[5px] w-10 bg-white transition-all duration-300 ease-in-out group-hover:bg-indigo-400" [ngClass]="uiClasses.barOne"></div>
+        <div class="h-[5px] w-10 my-1.5 bg-white transition-all duration-300 ease-in-out group-hover:bg-indigo-400" [ngClass]="uiClasses.barTwo"></div>
+        <div class="h-[5px] w-10 bg-white transition-all duration-300 ease-in-out group-hover:bg-indigo-400" [ngClass]="uiClasses.barThree"></div>
+      </div>
+    </div>
+
+  </nav>
+  <div class="md:hidden">
+    <ul class="fixed bottom-0 left-0 right-0 top-[68px] z-40 flex flex-col items-center bg-white pt-10 transform-gpu transition-all duration-500 ease-in-out" [ngClass]="uiClasses.menu">
+      <div class="flex w-11/12 max-w-4xl flex-col items-center space-y-4 text-center">
+
+        <a (click)="toggleMenu()" routerLink="/"
+           class="block w-full rounded-lg p-2 text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-md transform"
+           routerLinkActive="bg-indigo-700 text-white font-bold"
+           [routerLinkActiveOptions]="{exact: true}">
+          Home
+        </a>
+        <a (click)="toggleMenu()" routerLink="/coming"
+           class="block w-full rounded-lg p-2 text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-md transform"
+           routerLinkActive="bg-indigo-700 text-white font-bold">
+          News
+        </a>
+        <a (click)="toggleMenu()" routerLink="/about"
+           class="block w-full rounded-lg p-2 text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-md transform"
+           routerLinkActive="bg-indigo-700 text-white font-bold">
+          About
+        </a>
+        <a (click)="toggleMenu()" routerLink="/contact"
+           class="block w-full rounded-lg p-2 text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-md transform"
+           routerLinkActive="bg-indigo-700 text-white font-bold">
+          Contact
+        </a>
+        <a (click)="toggleMenu()" routerLink="/faq"
+           class="block w-full rounded-lg p-2 text-center transition-all duration-300 ease-out hover:scale-105 hover:shadow-md transform"
+           routerLinkActive="bg-indigo-700 text-white font-bold">
+          FAQ
+        </a>
+        <button (click)="toggleMenu()" routerLink="/coming" class="px-4 py-2 font-semibold text-white bg-indigo-600 rounded-md hover:bg-indigo-700 transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg transform">
+          Download
+        </button>
+
+      </div>
+    </ul>
+  </div>
+</header>

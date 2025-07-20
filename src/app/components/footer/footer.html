@@ -1,0 +1,31 @@
+<footer class="bg-black/90 backdrop-blur-sm text-gray-200">
+  <div class="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
+    <div class="flex justify-center">
+      <span class="text-lg font-semibold text-white">PickPlay</span>
+    </div>
+
+    <nav class="mt-8 flex flex-wrap justify-center gap-x-6 gap-y-2 text-sm" aria-label="Footer">
+      <a routerLink="/" class="hover:text-indigo-400 transition-colors duration-300" routerLinkActive="text-indigo-400"  [routerLinkActiveOptions]="{exact: true}">Home</a>
+      <a routerLink="/about" class="hover:text-indigo-400 transition-colors duration-300" routerLinkActive="text-indigo-400">About</a>
+      <a routerLink="/contact" class="hover:text-indigo-400 transition-colors duration-300" routerLinkActive="text-indigo-400">Contact</a>
+      <a routerLink="/faq" class="hover:text-indigo-400 transition-colors duration-300" routerLinkActive="text-indigo-400">FAQ</a>
+    </nav>
+
+    <div class="mt-8 border-t border-white/10 pt-8 text-center text-sm text-gray-400">
+      <p class="leading-relaxed">
+        All mobile game visuals are sourced from Google Play, and App Store links are provided for user convenience. All PC game visuals are sourced from Steam.<br>We are not affiliated with Google LLC, Apple Inc., or Valve Corporation.</p>
+
+      <div class="mt-6 flex flex-col items-center justify-center gap-y-3 sm:flex-row sm:gap-x-4">
+        <p>
+          &copy; {{ currentYear }} PickPlay. All rights reserved.
+        </p>
+        <span class="hidden sm:inline text-gray-500" aria-hidden="true">|</span>
+        <a routerLink="/copyright" class="hover:text-indigo-400 transition-colors duration-300">Copyright Policy</a>
+      </div>
+
+      <p class="mt-2 text-xs text-gray-500">
+        All game content is the property of their respective owners.
+      </p>
+    </div>
+  </div>
+</footer>

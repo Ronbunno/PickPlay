@@ -1,0 +1,41 @@
+<section>
+  <div class="flex justify-between items-center max-w-[90%] m-auto mb-4">
+    <h2 class="text-2xl font-bold">PC Games</h2>
+    <div class="flex space-x-2">
+      <button (click)="scrollLeft()" class="p-2 rounded-full hover:cursor-pointer">
+        <i class="fa-solid fa-circle-chevron-left fa-2x text-indigo-500"></i>
+      </button>
+      <button (click)="scrollRight()" class="rounded-full hover:cursor-pointer">
+        <i class="fa-solid fa-circle-chevron-right fa-2x text-indigo-500"></i>
+      </button>
+    </div>
+  </div>
+
+  <div #scrollContainer class="flex overflow-x-auto space-x-4 p-4 max-w-[95%] m-auto scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
+    @for (game of pcGames; track game.id) {
+      <div class="flex-shrink-0 w-80 rounded-lg bg-white overflow-hidden shadow-md transform transition duration-300 hover:scale-105 hover:shadow-lg">
+        <a [routerLink]="['/game', game.id]">
+          <div class="h-48">
+            <img class="w-full h-full object-cover" [src]="game.screenshot[0]" [alt]="game.title">
+          </div>
+          <div class="p-4 flex flex-col">
+            <p class="flex space-x-2">
+              <span class="text-xs font-medium bg-gray-200 text-gray-800 px-2 py-1 rounded-full w-fit mb-2">
+                {{ game.type[0] }}
+              </span>
+              <span class="text-xs font-medium bg-gray-200 text-gray-800 px-2 py-1 rounded-full w-fit mb-2">
+                {{ game.type[1] }}
+              </span>
+            </p>
+            <h4 class="text-lg font-semibold mb-2 flex-grow text-gray-900 line-clamp-1">
+              {{ game.title }}
+            </h4>
+            <p class="text-gray-600 text-sm mt-auto line-clamp-2">
+              {{ game.description }}
+            </p>
+          </div>
+        </a>
+      </div>
+    }
+  </div>
+</section>
