@@ -32,7 +32,7 @@ export class Faq {
     },
     {
       question: 'How can game developers request changes?',
-      answer: `Developers can email <a href="mailto:ronbunno7@gmail.com" class="text-blue-600 hover:underline">developerspickplay.com</a> to update assets or information.`,
+      answer: `Developers can email <a href="mailto:ronbunno7@gmail.com" class="text-blue-600 hover:underline">ronbunno7@gmail.com</a> to update assets or information.`,
       isOpen: false
     },
     {
