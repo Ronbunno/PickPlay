@@ -7,10 +7,11 @@ import {Comming} from './components/comming/comming';
 import { Contact } from './components/contact/contact';
 import {Copyright} from './components/copyright/copyright';
 import { Faq } from './components/faq/faq';
+import {gameIdGuard} from './guards/game-id-guard';
 
 export const routes: Routes = [
   {path:'', component: Home},
-  { path: 'game/:id', component: CardDetail },
+  { path: 'game/:id', component: CardDetail,canActivate: [gameIdGuard] },
   { path: 'about', component: About },
   { path: 'coming', component: Comming },
   { path: 'contact', component: Contact},
@@ -18,3 +19,4 @@ export const routes: Routes = [
   {path: 'faq', component: Faq},
   { path: '**', component: NotFound}
 ];
+
